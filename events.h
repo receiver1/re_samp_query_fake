@@ -22,7 +22,6 @@ public:
 	R call(Args... params) {
 		std::lock_guard<std::mutex> lock(event_lock);
 
-		if (!m_func) return 0;
-		return m_func(std::forward<Args>(params)...);
+		if (m_func) return m_func(std::forward<Args>(params)...);
 	}
 };
